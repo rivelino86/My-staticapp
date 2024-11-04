@@ -1,9 +1,9 @@
 pipeline{
-    agent
-          any
-          
+    agent any
+     
+
     stages{
-        stage("A"){
+        stage('Let's see what gonna happend){
             steps{
                 echo "========executing A========"
           }
