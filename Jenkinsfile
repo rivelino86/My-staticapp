@@ -3,10 +3,10 @@ pipeline{
      
 
     stages{
-        stage('Lets see what gonna happend'){
-            steps{
-                echo "========executing A========"
-          }
+        stage('build image'){
+           steps{
+            sh "docker build -t clinicapp:latest ."
+           }
         }
     }
 }
