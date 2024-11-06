@@ -5,7 +5,7 @@ pipeline{
         string (name: 'VERSION', defaultValue: '1.0.0')
      }
     stages{
-        stage('build image & push '){
+        stage('build image & push'){
            steps{
             script{
                 // This step should not normally be used in your script. Consult the inline help for details.
