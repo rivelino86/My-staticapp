@@ -2,10 +2,10 @@ pipeline{
     agent any
 
      parameters {
-        string (name: 'VERSION', defaultValue: '1.0.3')
+        string (name: 'VERSION', defaultValue: '1.0.0')
      }
     stages{
-        stage('build image & push to dockerhub'){
+        stage('build image & push '){
            steps{
             script{
                 // This step should not normally be used in your script. Consult the inline help for details.
