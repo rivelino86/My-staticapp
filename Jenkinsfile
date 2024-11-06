@@ -11,6 +11,7 @@ pipeline{
                     sh "docker build -t clinicapp:1.0.0 ."
                     sh "docker tag clinicapp:1.0.0 rivelino86/clinicapp:1.0.0"
                     sh "docker push rivelino86/clinicapp:1.0.0"
+                    sh "docker rmi clinicapp:1.0.0"
                }
              }
            
