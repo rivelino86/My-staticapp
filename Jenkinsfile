@@ -5,7 +5,7 @@ pipeline{
         string (name: 'VERSION', defaultValue: '1.0.0')
      }
       environment{
-        CRED_ID = 'ecr:us-east-1:clinicapp'
+        CRED_ID = 'ecr:us-east-1:my-clinicapp'
         REPO_NAME = 'my-clinicapp'
         REPO_URL = "655040006853.dkr.ecr.us-east-1.amazonaws.com"
         FULL_REPO_URL = 'https://${url}/'
