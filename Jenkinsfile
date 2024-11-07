@@ -28,9 +28,14 @@ pipeline{
                         echo ' "***********I am a DevOps Engineer*********" '
 
                         sh "docker build -t clinicapp:${params.VERSION} ."
+
                         sh "docker tag clinicapp:${params.VERSION} 655040006853.dkr.ecr.us-east-1.amazonaws.com/my-clinicapp:${params.VERSION}"
+
                         sh "docker tag clinicapp:${params.VERSION} 655040006853.dkr.ecr.us-east-1.amazonaws.com/my-clinicapp:latest"
+
                         sh "docker push 655040006853.dkr.ecr.us-east-1.amazonaws.com/my-clinicapp:latest"
+                        
+                        sh "docker push 655040006853.dkr.ecr.us-east-1.amazonaws.com/${params.VERSION}"
                  }
             }
         }
