@@ -5,7 +5,7 @@ pipeline{
         string (name: 'VERSION', defaultValue: '1.0.0')
      }
       environment{
-        CRED_ID = 'ecr:us-east-1:clinic_app'
+        CRED_ID = 'ecr:us-east-1:clinicapp'
         REPO_NAME = 'my-clinicapp'
         REPO_URL = "655040006853.dkr.ecr.us-east-1.amazonaws.com"
         FULL_REPO_URL = 'https://${url}/'
@@ -32,7 +32,7 @@ pipeline{
         steps{
             script{
                 // This step should not normally be used in your script. Consult the inline help for details.
-                 withDockerRegistry(credentialsId: CRED_ID , url: FULL_REPO_URL){
+                 withDockerRegistry(credentialsId: CRED_ID , url: FULL_REPO_URL ){
                         echo ' "***********I am a DevOps Engineer*********" '
 
                         sh "docker build -t clinicapp:${params.VERSION} ."
