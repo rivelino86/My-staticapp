@@ -8,7 +8,7 @@ pipeline{
         CRED_ID = 'ecr:us-east-1:clinic_app'
         REPO_NAME = 'my-clinicapp'
         REPO_URL = "655040006853.dkr.ecr.us-east-1.amazonaws.com"
-        FULL_REPO_URL = 'https://${url}/'
+        FULL_REPO_URL = 'http://${URL}/'
        
       }
    
