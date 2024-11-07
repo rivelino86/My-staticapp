@@ -35,7 +35,7 @@ pipeline{
 
                         sh "docker push 655040006853.dkr.ecr.us-east-1.amazonaws.com/my-clinicapp:latest"
 
-                        sh "docker push 655040006853.dkr.ecr.us-east-1.amazonaws.com/my-clinicapp${params.VERSION}"
+                        sh "docker push 655040006853.dkr.ecr.us-east-1.amazonaws.com/my-clinicapp:${params.VERSION}"
                  }
             }
         }
