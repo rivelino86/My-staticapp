@@ -37,7 +37,7 @@ pipeline {
 
         stage("Update ECS") {
             steps {
-                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --${AWS_REGION} --force-new-deployment"
+                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --region ${AWS_REGION} --force-new-deployment"
             }
         }
     }
