@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: CRED_ID, url: FULL_REPO_URL) {
-                        echo "***********I am a DevOps Engineer***********"
+                        echo "***********I am a DevOps Engineer**********"
                         
                         sh "docker build -t clinicapp:${params.VERSION} ."
                         
