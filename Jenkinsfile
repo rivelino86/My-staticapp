@@ -35,14 +35,14 @@ pipeline{
 
                         sh "docker push ${REPO_URL}/${REPO_NAME}:${params.VERSION}"
                  }
-              }
-            
+               }
+        }
             }
+    }
             stage("uptade ECS"){
                 steps{
                   sh "aws ecs uptade-service --cluster ${CLUSTER_NAME}  --service  ${SERVICE_NAME} --force-newdelpoyment"
            }
         }
-    }
-  }
-}//sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service  ${ECS_SERVICE_NAME} --force-new-deployment"
+
+  }//sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service  ${ECS_SERVICE_NAME} --force-new-deployment"
