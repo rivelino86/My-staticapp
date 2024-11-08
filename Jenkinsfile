@@ -6,7 +6,7 @@ pipeline{
      }
       environment{
         CRED_ID = 'ecr:us-east-1:clinic_app'
-        REPO_NAME = 'my-clinicapp'
+        REPO_NAME = 'My-staticapp'
         REPO_URL = "655040006853.dkr.ecr.us-east-1.amazonaws.com"
         FULL_REPO_URL = 'http://${URL}/'
        
@@ -45,6 +45,10 @@ pipeline{
 
                         sh "docker push ${REPO_URL}/${REPO_NAME}:${params.VERSION}"
                  }
+            }
+            stage('uptade ECS')
+            steps{
+              sh "aws ecs uptade-service --cluster Devopscluster --service static-appservice --force-newdelpoyment"
             }
         }
     }
