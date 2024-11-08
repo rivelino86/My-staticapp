@@ -9,23 +9,13 @@ pipeline{
         REPO_NAME = 'My-staticapp'
         REPO_URL = "655040006853.dkr.ecr.us-east-1.amazonaws.com"
         FULL_REPO_URL = 'http://${URL}/'
+        CLUSTER_NAME = 'clinic-cluster'
+        SERVICE_NAME = 'clinic-app-service'
        
       }
    
     stages{
-        //stage('build image & push '){
-           //steps{
-            //script{
-                // This step should not normally be used in your script. Consult the inline help for details.
-                   //withDockerRegistry(credentialsId: 'dockerhub_id') {
-                    //sh "docker build -t clinicapp:${params.VERSION} ."
-                    //sh "docker tag clinicapp:${params.VERSION} rivelino86/clinicapp:${params.VERSION}"
-                  //  sh "docker push rivelino86/clinicapp:${params.VERSION}"
-              // }
-             //}
-           
-           //}
-        //}
+        
         stage("Build & push to ECR"){
 
         
@@ -47,10 +37,10 @@ pipeline{
                  }
             }
             stage('uptade ECS')
-            steps{
-              sh "aws ecs uptade-service --cluster Devopscluster --service static-appservice --force-newdelpoyment"
+                steps{
+                  sh "aws ecs uptade-service --cluster ${CLUSTER_NAME}  --service  ${SERVICE_NAME} --force-newdelpoyment"
             }
         }
     }
   }
-}
+}//sh "aws ecs update-service --cluster ${ECS_CLUSTER_NAME} --service  ${ECS_SERVICE_NAME} --force-new-deployment"
