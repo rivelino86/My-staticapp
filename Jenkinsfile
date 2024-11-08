@@ -12,7 +12,7 @@ pipeline {
         FULL_REPO_URL = "https://${REPO_URL}"
         CLUSTER_NAME = 'clinic-cluster'
         SERVICE_NAME = 'clinic-app-service'
-        REGION_NAME = 'us-east-1'
+        AWS_REGION = 'us-east-1'
     }
 
     stages {
