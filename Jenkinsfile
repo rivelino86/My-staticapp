@@ -34,13 +34,13 @@ pipeline {
                     }
                 }
             }
-            //  stage("install AWS CLI") {
-            //     steps{
-            //       sh  'curl "${AWS_CLI_URL}" -o "awscliv2.zip"'
-            //       sh  'unzip awscliv2.zip'
-            //       sh  'sudo ./aws/install'
-            //     }
-            // }
+             stage("install AWS CLI") {
+                steps{
+                  sh  'curl "${AWS_CLI_URL}" -o "awscliv2.zip"'
+                  sh  'unzip awscliv2.zip'
+                  sh  'sudo ./aws/install'
+                }
+            }
         }
         //  stage("Update ECS") {
         //        steps {
