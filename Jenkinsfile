@@ -12,7 +12,7 @@ pipeline {
         FULL_REPO_URL = "https://${REPO_URL}"
         CLUSTER_NAME = 'clinic-cluster'
         SERVICE_NAME = 'clinic-app-service'
-        AWS_REGION = 'us-east-1'
+        // AWS_REGION = 'us-east-1'
     }
 
     stages {
@@ -34,23 +34,23 @@ pipeline {
                 }
             }
         stage( "install AWSCLI"){
-            steps{
-              sh '''
-
-                   $ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            steps {
+              script{
+              
+              sh  "$ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
                    unzip awscliv2.zip
-                   sudo ./aws/install
-
-              '''
-            }
-        }
+                   sudo ./aws/install"
+                
+             }
+           }
           
         }
 
         stage("Update ECS") {
             steps {
-                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --region ${AWS_REGION}  --force-new-deployment"
+                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --force-new-deployment"
             }
         }
-    }
+     }
+   }
 }
