@@ -12,7 +12,7 @@ pipeline {
         FULL_REPO_URL = "https://${REPO_URL}"
         CLUSTER_NAME = 'clinic-cluster'
         SERVICE_NAME = 'clinic-app-service'
-        AWS_REGION = 'us-east-1'
+        // AWS_REGION = 'us-east-1'
     }
 
     stages {
@@ -37,7 +37,7 @@ pipeline {
 
         stage("Update ECS") {
             steps {
-                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --region ${AWS_REGION} --force-new-deployment"
+                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME}  --force-new-deployment"
             }
         }
     }
