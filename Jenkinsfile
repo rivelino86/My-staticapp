@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'VERSION', defaultValue: '1.0.0', description: 'App to deploy')
+        string(name: 'VERSION', defaultValue: '1.2.0', description: 'App to deploy')
     }
 
     environment {
