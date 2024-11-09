@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'VERSION', defaultValue: '1.2.0', description: 'App to deploy')
+        string(name: 'VERSION', defaultValue: '1.0.0', description: 'App to deploy')
     }
 
     environment {
@@ -12,7 +12,8 @@ pipeline {
         FULL_REPO_URL = "https://${REPO_URL}"
         CLUSTER_NAME = 'clinic-cluster'
         SERVICE_NAME = 'clinic-app-service'
-        // AWS_REGION = 'us-east-1'
+        AWS_REGION = 'us-east-1'
+        AWS_CLI_URL = 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
     }
 
     stages {
@@ -32,25 +33,20 @@ pipeline {
                         sh "docker push ${REPO_URL}/${REPO_NAME}:${params.VERSION}"
                     }
                 }
+            stage('install AWSCLI'){
+                steps{
+                  sh  'curl "${AWS_CLI_URL}" -o "awscliv2.zip"'
+                  sh  'unzip awscliv2.zip'
+                  sh  'sudo ./aws/install'
+                }
             }
-        stage( "install AWSCLI"){
-            steps {
-              script{
-              
-              sh  "${curl} "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-                   unzip awscliv2.zip
-                   sudo ./aws/install"
-                
-             }
-           }
-          
+            }
         }
 
         stage("Update ECS") {
             steps {
-                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --force-new-deployment"
+                sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --region ${AWS_REGION} --force-new-deployment"
             }
         }
-     }
-   }
+    }
 }
