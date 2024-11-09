@@ -33,13 +33,13 @@ pipeline {
                         sh "docker push ${REPO_URL}/${REPO_NAME}:${params.VERSION}"
                     }
                 }
-            stage('install AWSCLI'){
+            }
+             stage('install AWSCLI'){
                 steps{
                   sh  'curl "${AWS_CLI_URL}" -o "awscliv2.zip"'
                   sh  'unzip awscliv2.zip'
                   sh  'sudo ./aws/install'
                 }
-            }
             }
         }
 
