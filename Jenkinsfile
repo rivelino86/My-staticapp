@@ -19,14 +19,14 @@ pipeline {
     stages {
          stage('Filesystem Security Scan') {
             steps {
-                sh "trivy fs --format table -o job-app-scan-report.html ."
+                sh "trivy fs --format table -o clinicapp-scan-report.html ."
             }
         }
         
                       stage('Scan Docker Image with Trivy') {
             steps {
                 echo "Scanning Docker image with Trivy"
-                sh "trivy image --format table -o docker_image_scan_report_${VERSION}.html ${REPO_URL_NAME}/${ECR_NAME}:${VERSION}"
+                sh "trivy image --format table -o docker_image_scan_report_${VERSION}.html ${REPO_URL}/${REPO_NAME}:${VERSION}"
             }
         }
         stage("Build & Push to ECR") {
