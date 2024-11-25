@@ -13,7 +13,7 @@ pipeline {
         CLUSTER_NAME = 'clinic-cluster'
         SERVICE_NAME = 'clinic-app-service'
         AWS_REGION = 'us-east-1'
-        AWS_CLI_URL = 'https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip'
+        SONAR_SCANNER= tool 'sonar'
     }
 
     stages {
@@ -28,6 +28,16 @@ pipeline {
                 echo "Scanning Docker image with Trivy"
                 sh "trivy image --format table -o docker_image_scan_report_${VERSION}.html ${REPO_URL}/${REPO_NAME}:${VERSION}"
             }
+        }
+           stage(''){
+            steps{
+                script{
+          
+             withSonarQubeEnv(credentialsId: 'Sonar_cred') {
+                echo "tell me sonar if sonar is ready"
+     }
+   }
+}
         }
         stage("Build & Push to ECR") {
             steps {
