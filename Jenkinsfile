@@ -17,7 +17,11 @@ pipeline {
     }
 
     stages {
-        
+         stage('Filesystem Security Scan') {
+            steps {
+                sh "trivy fs --format table -o job-app-scan-report.html ."
+            }
+        }
         stage("Build & Push to ECR") {
             steps {
                 script {
@@ -33,21 +37,13 @@ pipeline {
                         sh "docker push ${REPO_URL}/${REPO_NAME}:${params.VERSION}"
                     }
                 }
-            }
-             stage("install AWS CLI") {
-                steps{
-                  sh  'curl "${AWS_CLI_URL}" -o "awscliv2.zip"'
-                  sh  'unzip awscliv2.zip'
-                  sh  'sudo ./aws/install'
-                }
+            
             }
         }
-        //  stage("Update ECS") {
-        //        steps {
-        //         sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --region ${AWS_REGION} --force-new-deployment"
-        //     }
-        // }
-    }
-        
-            
+         stage("Update ECS") {
+                steps {
+                 sh "aws ecs update-service --cluster ${CLUSTER_NAME} --service  ${SERVICE_NAME} --region ${AWS_REGION} --force-new-deployment"
+             }
+         }
+    }            
 }
