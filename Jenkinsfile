@@ -29,12 +29,19 @@ pipeline {
                 sh "trivy image --format table -o docker_image_scan_report_${VERSION}.html ${REPO_URL}/${REPO_NAME}:${VERSION}"
             }
         }
-           stage(''){
+           stage('scan with SonarQube'){
             steps{
                 script{
           
              withSonarQubeEnv(credentialsId: 'Sonar_cred') {
                 echo "tell me sonar if sonar is ready"
+                sh """
+                            ${SONAR_SCANNER}/bin/sonar-scanner \
+                            -Dsonar.projectKey=clinc_app \
+                            -Dsonar.sources=. \
+                            -Dsonar.projectName=clinic_app \
+                            -Dsonar.java.binaries=.
+                            """
      }
    }
 }
