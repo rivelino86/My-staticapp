@@ -22,22 +22,29 @@ pipeline {
                 sh "trivy fs --format table -o job-app-scan-report.html ."
             }
         }
+        
+                      stage('Scan Docker Image with Trivy') {
+            steps {
+                echo "Scanning Docker image with Trivy"
+                sh "trivy image --format table -o docker_image_scan_report_${VERSION}.html ${REPO_URL_NAME}/${ECR_NAME}:${VERSION}"
+            }
+        }
         stage("Build & Push to ECR") {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: CRED_ID, url: FULL_REPO_URL) {
-                        echo "***********I am a DevOps Engineer**********"
-                        
-                        sh "docker build -t clinicapp:${params.VERSION} ."
-                        
+                       echo "***********I am a DevOps Engineer**********"
+                        sh "docker build -t clinicapp:${params.VERSION} ."      
                         sh "docker tag clinicapp:${params.VERSION} ${REPO_URL}/${REPO_NAME}:${params.VERSION}"
                         sh "docker tag clinicapp:${params.VERSION} ${REPO_URL}/${REPO_NAME}:latest"
-                        
+            stage('push docker image to ECR'){
+                
+                    withDockerRegistry(credentialsId: CRED_ID, url: FULL_REPO_URL) {
+                     
                         sh "docker push ${REPO_URL}/${REPO_NAME}:latest"
                         sh "docker push ${REPO_URL}/${REPO_NAME}:${params.VERSION}"
                     }
                 }
-            
+              } 
             }
         }
          stage("Update ECS") {
