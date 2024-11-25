@@ -39,8 +39,7 @@ pipeline {
                             ${SONAR_SCANNER}/bin/sonar-scanner \
                             -Dsonar.projectKey=clinc_app \
                             -Dsonar.sources=. \
-                            -Dsonar.projectName=clinic_app \
-                            -Dsonar.java.binaries=.
+                            -Dsonar.projectName=clinic_app 
                             """
      }
    }
