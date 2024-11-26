@@ -13,7 +13,7 @@ pipeline {
         CLUSTER_NAME = 'clinic-cluster'
         SERVICE_NAME = 'clinic-app-service'
         AWS_REGION = 'us-east-1'
-        SONAR_SCANNER= tool 'sonar'
+        SONAR_SCANNER= tool 'Sonar'
     }
 
     stages {
