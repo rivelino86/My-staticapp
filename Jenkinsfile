@@ -29,6 +29,12 @@ pipeline {
                 sh "trivy image --format table -o docker_image_scan_report_${VERSION}.html ${REPO_URL}/${REPO_NAME}:${VERSION}"
             }
         }
+             stage('Debug Environment') {
+                 steps {
+                   sh "env | grep SONAR"
+          }
+       }
+
            stage('scan with SonarQube'){
             steps{
                 script{
