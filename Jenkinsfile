@@ -43,9 +43,9 @@ pipeline {
                 echo "tell me sonar if sonar is ready"
                 sh """
                             ${SONAR_SCANNER}/bin/sonar-scanner \
-                            -Dsonar.projectKey="clinc_app" \
+                            -Dsonar.projectKey=clinc_app \
                             -Dsonar.sources=. \
-                            -Dsonar.projectName="clinic_app"
+                            -Dsonar.projectName=clinic_app
                             """
      }
    }
